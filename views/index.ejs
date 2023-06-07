@@ -7,7 +7,7 @@
   <body>
     <header>
       <nav>
-        <ul>
+        <ul class="links">
           <li>
             <a href="/catalog"> Home </a>
           </li>
@@ -16,7 +16,7 @@
           </li>
           <li>
             <a href="/catalog/categories"> All Categories </a>
-            <ul>
+            <ul class="inner-links">
               <% all_categories.forEach(category => { %>
                 <li>
                   <a href="<%= category.url %>"> <%= category.name %> </a>
@@ -28,7 +28,7 @@
       </nav> 
       
       <nav>
-        <ul>
+        <ul class="links">
           <li>
             <a href="/catalog/category/create">Create new Category</a>
           </li>
@@ -37,6 +37,12 @@
           </li>
         </ul>
       </nav>
+      
+      <a class="gh-link" href="https://github.com/OscarSoanes">Built by Oscar Soanes</a>
     </header>
+
+    <main>
+
+    </main>
   </body>
 </html>

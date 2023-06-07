@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+header {
+  @apply bg-slate-700 text-white grid;
+  grid-template-rows: min-content 1fr min-content;
+}
+
+header > nav {
+  @apply p-4;
+}
+
+header > nav:first-of-type {
+  @apply border-b-2 text-xl;
+}
+
+.links {
+  @apply grid gap-4 underline;
+}
+
+.inner-links {
+  @apply pl-4 grid gap-2 mt-1 text-base no-underline;
+}
+
+body {
+  @apply grid;
+  grid-template-columns: max-content 1fr;
+}
+
+html, body {
+  @apply h-full;
+}
+
+.gh-link {
+  @apply p-2 text-center underline;
+}
+
+header a:hover {
+  @apply text-gray-300;
+}

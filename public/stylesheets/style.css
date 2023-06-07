@@ -476,7 +476,58 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-.bg-red-100 {
+
+header {
+  display: grid;
   --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  grid-template-rows: min-content 1fr min-content;
+}
+
+header > nav {
+  padding: 1rem;
+}
+
+header > nav:first-of-type {
+  border-bottom-width: 2px;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.links {
+  display: grid;
+  gap: 1rem;
+  text-decoration-line: underline;
+}
+
+.inner-links {
+  margin-top: 0.25rem;
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-decoration-line: none;
+}
+
+body {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
+html, body {
+  height: 100%;
+}
+
+.gh-link {
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration-line: underline;
+}
+
+header a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
