@@ -5,7 +5,38 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1 class="bg-red-100"><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="/catalog"> Home </a>
+          </li>
+          <li>
+            <a href="/catalog/items"> All Items </a>
+          </li>
+          <li>
+            <a href="/catalog/categories"> All Categories </a>
+            <ul>
+              <% all_categories.forEach(category => { %>
+                <li>
+                  <a href="<%= category.url %>"> <%= category.name %> </a>
+                </li>
+              <% }); %>
+            </ul>
+          </li>
+        </ul>
+      </nav> 
+      
+      <nav>
+        <ul>
+          <li>
+            <a href="/catalog/category/create">Create new Category</a>
+          </li>
+          <li>
+            <a href="/catalog/item/create">Create new Item</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
   </body>
 </html>

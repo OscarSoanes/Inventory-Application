@@ -1,9 +1,15 @@
 const Category = require("../models/Category");
 const asyncHandler = require("express-async-handler");
+const mongoose = require("mongoose");
 
 // Display Index page.
 exports.index = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Index Page");
+  const allCategories = await Category.find().exec();
+  
+  res.render("index", {
+    title: "Index",
+    all_categories: allCategories,
+  });
 })
 
 // Display list of all Category
