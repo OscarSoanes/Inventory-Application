@@ -43,15 +43,20 @@
     
     <main>
       <h1> <%= title %></h1>
+      <div class="detail-container">
+        <p>Name: </p>
+        <p class="name"><%= category.name %> </p>
+        <p>Description: </p>
+        <p> <%= category.desc %> </p>
+      </div>
 
-      <p> <%= category.name %> </p>
-      <p> <%= category.desc %> </p>
 
-      <div>
+      <p class="item_category_heading">Items in Category:</p>
+      <div class="list_of_items">
         <% all_items.forEach(item => { %>
           <a href="<%= item.url %>">
-            <p> <%= item.name %> </p>
-            <p> <%= item.number_in_stock %></p>
+            <p> Name: <%= item.name %> </p>
+            <p> Quantity: <%= item.number_in_stock %></p>
           </a>
         <% }) %>
       </div>

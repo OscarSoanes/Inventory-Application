@@ -64,3 +64,25 @@ main > h1 {
 .detail_container > .product-category > h2, .detail_container > .product-item > h2{
   @apply mt-2 text-xl underline;
 }
+
+.name {
+  @apply text-lg;
+}
+
+.list_of_items {
+  @apply grid gap-4;
+  grid-template-columns: repeat( auto-fill, minmax(200px, 1fr) );
+}
+
+.list_of_items > a {
+  @apply bg-slate-200 rounded p-2 text-center; 
+}
+
+.detail-container {
+  @apply grid gap-x-4;
+  grid-template-columns: max-content 1fr;
+}
+
+.item_category_heading {
+  @apply mt-2;
+}

@@ -568,3 +568,33 @@ main > h1 {
   line-height: 1.75rem;
   text-decoration-line: underline;
 }
+
+.name {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.list_of_items {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat( auto-fill, minmax(200px, 1fr) );
+}
+
+.list_of_items > a {
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.detail-container {
+  display: grid;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  grid-template-columns: max-content 1fr;
+}
+
+.item_category_heading {
+  margin-top: 0.5rem;
+}
