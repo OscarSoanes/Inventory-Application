@@ -61,10 +61,6 @@ main > h1 {
   @apply mb-4 text-xl underline;
 }
 
-.detail_container > .product-category > h2 {
+.detail_container > .product-category > h2, .detail_container > .product-item > h2{
   @apply mt-2 text-xl underline;
-}
-
-.detail_container > .product-category > p {
-  @apply overflow-hidden;
 }

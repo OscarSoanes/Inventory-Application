@@ -562,17 +562,9 @@ main > h1 {
   text-decoration-line: underline;
 }
 
-.detail_container > .product-category > h2 {
+.detail_container > .product-category > h2, .detail_container > .product-item > h2 {
   margin-top: 0.5rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
   text-decoration-line: underline;
-}
-
-.detail_container > .product-category > p {
-  overflow: hidden;
-}
-
-.detail_container > .product-category {
-  border-bottom-width: 2px;
 }
