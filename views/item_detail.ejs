@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="links">
+          <li>
+            <a href="/catalog"> Home </a>
+          </li>
+          <li>
+            <a href="/catalog/items"> All Items </a>
+          </li>
+          <li>
+            <a href="/catalog/categories"> All Categories </a>
+            <ul class="inner-links">
+              <% all_categories.forEach(category => { %>
+                <li>
+                  <a href="<%= category.url %>"> <%= category.name %> </a>
+                </li>
+              <% }); %>
+            </ul>
+          </li>
+        </ul>
+      </nav> 
+      
+      <nav>
+        <ul class="links">
+          <li>
+            <a href="/catalog/category/create">Create new Category</a>
+          </li>
+          <li>
+            <a href="/catalog/item/create">Create new Item</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <a class="gh-link" href="https://github.com/OscarSoanes">Built by Oscar Soanes</a>
+    </header>
+    
+    <main>
+      <h1> <%= title %></h1>
+      <div class="detail-container">
+        <p>Name: </p>
+        <p class="name"><%= item.name %> </p>
+        <p>Description: </p>
+        <p> <%= item.desc %> </p>
+        <p>Number In Stock: </p>
+        <p> <%= item.number_in_stock %></p>
+        <p>Price: </p>
+        <p> <%= item.price_format %></p>
+
+        <p>Category:</p>
+        <p> <%= item.category.name %></p>
+      </div>
+      </div>
+    </main>
+  </body>
+</html>

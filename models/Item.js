@@ -14,4 +14,8 @@ ItemSchema.virtual("url").get(function () {
   return `/catalog/item/${this._id}`;
 });
 
+ItemSchema.virtual("price_format").get(function () {
+  return `£${(this.price * 100 / 100).toFixed(2)}`
+})
+
 module.exports = mongoose.model("Item", ItemSchema);
