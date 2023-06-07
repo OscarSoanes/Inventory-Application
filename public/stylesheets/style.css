@@ -531,3 +531,48 @@ header a:hover {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
+
+main {
+  padding: 1rem;
+}
+
+main > h1 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.category-container-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+}
+
+.category-container-grid > .product-category {
+  border-radius: 0.375rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  padding: 1rem;
+}
+
+.category-container-grid > .product-category > h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  text-decoration-line: underline;
+}
+
+.detail_container > .product-category > h2 {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  text-decoration-line: underline;
+}
+
+.detail_container > .product-category > p {
+  overflow: hidden;
+}
+
+.detail_container > .product-category {
+  border-bottom-width: 2px;
+}

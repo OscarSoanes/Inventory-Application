@@ -42,16 +42,16 @@
     </header>
 
     <main>
-      <h1>List of all Categories</h1>
+      <h1> <%= title %> </h1>
       
-      <div class="category-container-grid">
+      <div class="detail_container">
         <% all_categories.forEach(category => { %>
           <a class="product-category" href="<%= category.url %>">
-            <h2> <%= category.name %> </h2>
+            <h2> <%= category.name %> Products </h2>
             <p> <%= category.desc %> </p>
           </a>
         <% }); %>
-        </div>
-      </main>
+      </div>
+    </main>
   </body>
 </html>

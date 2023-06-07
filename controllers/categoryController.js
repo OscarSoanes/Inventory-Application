@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 // Display Index page.
 exports.index = asyncHandler(async (req, res, next) => {
-  const allCategories = await Category.find().exec();
+  const allCategories = await Category.find().sort({ name: 1 }).exec();
   
   res.render("index", {
     title: "Index",
@@ -14,7 +14,12 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 // Display list of all Category
 exports.category_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Category List");
+  const allCategories = await Category.find().sort({ name: 1 }).exec();
+
+  res.render("category_list", {
+    title: "Category List",
+    all_categories: allCategories,
+  });
 })
 
 // Display detail page for a specific category

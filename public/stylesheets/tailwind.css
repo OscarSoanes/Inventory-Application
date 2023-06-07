@@ -39,3 +39,32 @@ html, body {
 header a:hover {
   @apply text-gray-300;
 }
+
+main {
+  @apply p-4;
+}
+
+main > h1 {
+  @apply text-2xl mb-8;
+}
+
+.category-container-grid {
+  @apply grid gap-4;
+  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+}
+
+.category-container-grid > .product-category {
+  @apply p-4 bg-slate-200 rounded-md;
+}
+
+.category-container-grid > .product-category > h2 {
+  @apply mb-4 text-xl underline;
+}
+
+.detail_container > .product-category > h2 {
+  @apply mt-2 text-xl underline;
+}
+
+.detail_container > .product-category > p {
+  @apply overflow-hidden;
+}
