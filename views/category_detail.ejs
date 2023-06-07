@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="links">
+          <li>
+            <a href="/catalog"> Home </a>
+          </li>
+          <li>
+            <a href="/catalog/items"> All Items </a>
+          </li>
+          <li>
+            <a href="/catalog/categories"> All Categories </a>
+            <ul class="inner-links">
+              <% all_categories.forEach(category => { %>
+                <li>
+                  <a href="<%= category.url %>"> <%= category.name %> </a>
+                </li>
+              <% }); %>
+            </ul>
+          </li>
+        </ul>
+      </nav> 
+      
+      <nav>
+        <ul class="links">
+          <li>
+            <a href="/catalog/category/create">Create new Category</a>
+          </li>
+          <li>
+            <a href="/catalog/item/create">Create new Item</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <a class="gh-link" href="https://github.com/OscarSoanes">Built by Oscar Soanes</a>
+    </header>
+    
+    <main>
+      <h1> <%= title %></h1>
+
+      <p> <%= category.name %> </p>
+      <p> <%= category.desc %> </p>
+
+      <div>
+        <% all_items.forEach(item => { %>
+          <a href="<%= item.url %>">
+            <p> <%= item.name %> </p>
+            <p> <%= item.number_in_stock %></p>
+          </a>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>
