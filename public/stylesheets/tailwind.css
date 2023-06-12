@@ -86,3 +86,20 @@ main > h1 {
 .item_category_heading {
   @apply mt-2;
 }
+
+.create-form > form {
+  @apply grid gap-x-4 gap-y-2;
+  grid-template-columns: max-content 1fr;
+}
+
+form > input, form > textarea, form > select {
+  @apply border rounded p-2;
+}
+
+select {
+  @apply bg-slate-100;
+}
+
+.primary-button {
+  @apply rounded bg-sky-300 col-span-2 p-2 w-32 mx-auto hover:bg-white border-sky-300 border-2;
+}

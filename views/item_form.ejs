@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="links">
+          <li>
+            <a href="/catalog"> Home </a>
+          </li>
+          <li>
+            <a href="/catalog/items"> All Items </a>
+          </li>
+          <li>
+            <a href="/catalog/categories"> All Categories </a>
+            <ul class="inner-links">
+              <% all_categories.forEach(category => { %>
+                <li>
+                  <a href="<%= category.url %>"> <%= category.name %> </a>
+                </li>
+              <% }); %>
+            </ul>
+          </li>
+        </ul>
+      </nav> 
+      
+      <nav>
+        <ul class="links">
+          <li>
+            <a href="/catalog/category/create">Create new Category</a>
+          </li>
+          <li>
+            <a href="/catalog/item/create">Create new Item</a>
+          </li>
+        </ul>
+      </nav>
+      
+      <a class="gh-link" href="https://github.com/OscarSoanes">Built by Oscar Soanes</a>
+    </header>
+    
+    <main>
+      <h1> <%= title %></h1>
+      
+      <div class="create-form">
+        <form action="" method="post">
+          <label for="name">Name: </label>
+          <input type="text" name="name" id="name" placeholder="Name" required="true" value="<%= item.name ? '' : item.name %>">
+
+          <label for="desc">Description: </label>
+          <textarea name="desc" id="desc" rows="3" placeholder="Description" value=" <%= item.desc ? '' : item.desc %>"></textarea>
+
+          <label for="number_in_stock">Number in Stock:</label>
+          <input type="number" name="number_in_stock" id="number_in_stock" min="0" placeholder="Number In Stock" required="true" value=" <%= item.number_in_stock ? '' : item.number_in_stock %>">
+
+          <label for="price">Price: </label>
+          <input type="number" name="price" id="price" step="0.01" min="0.01" pattern="^\d*(\.\d{0,2})?$" required="true" placeholder="Price" value=" <%= item.price ? '' : item.price %>">
+
+          <label for="category">Category:</label>
+          <select name="category" id="category" required="true" placeholder="Select Category">
+            <% all_categories.forEach(category => { %>
+              <% if (item.category) { %>
+                <option value="<%= category._id %>" selected="<%= item.category._id.toString() === category._id.toString() ? 'selected' : false %>"> <%= category.name %></option>
+              <% } else { %>
+                <option value="<%= category._id %>"> <%= category.name %></option>
+              <% } %>
+            <% }) %>
+          </select>
+
+          <button type="submit" class="primary-button">Submit</button>
+        </form>
+    </div>
+    </main>
+  </body>
+</html>
