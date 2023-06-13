@@ -1,6 +1,7 @@
 const Category = require("../models/Category");
 const Item = require("../models/Item");
 
+const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
 
@@ -59,9 +60,45 @@ exports.category_create_get = asyncHandler(async (req, res, next) => {
 })
 
 // Handle Category create on POST.
-exports.category_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Category create POST");
-})
+exports.category_create_post = [
+  // Validate and sanitize fields.
+
+  body("name", "Name must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+  body("description", "Description must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+  
+  asyncHandler(async (req, res, next) => {
+    // Extract the errors from request
+    const errors = validationResult(req);
+
+    // Create a new Category with sanitized data.
+    const category = new Category({
+      name: req.body.name,
+      desc: req.body.description
+    })
+
+    if (!errors.isEmpty()) {
+      // There are errors. Rerender form with sanitized data.
+
+      const allCategories = await Category.find().sort({ name: 1 }).exec();
+
+      res.render("category_form", {
+        title: "Create Category",
+        all_categories: allCategories,
+        category: category,
+        errors: errors.array()
+      });
+    } else {
+      await category.save();
+      res.redirect(category.url);
+    }
+  })
+]
 
 // Display Category delete form on GET.
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
