@@ -3,7 +3,6 @@ const Item = require("../models/Item");
 
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
-const mongoose = require("mongoose");
 
 // Display Index page.
 exports.index = asyncHandler(async (req, res, next) => {
@@ -102,12 +101,46 @@ exports.category_create_post = [
 
 // Display Category delete form on GET.
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Category delete GET");
-})
+  const [category, getAllCategories, allItemsWithCategory] = await Promise.all([
+    Category.findById(req.params.id).exec(),
+    Category.find().sort({ name: 1 }).exec(),
+    Item.find( {category: req.params.id }, "name price").exec(),
+  ]);
+
+  if (category === null) {
+    // No results
+
+    res.redirect("/catalog/categories");
+  }
+
+  res.render("category_delete", {
+    title: "Delete Category",
+    category: category,
+    all_categories: getAllCategories,
+    items: allItemsWithCategory,
+  });
+});
 
 // Handle Category delete form on POST.
 exports.category_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Category delete POST");
+  const [category, getAllCategories, allItemsWithCategory] = await Promise.all([
+    Category.findById(req.params.id).exec(),
+    Category.find().sort({ name: 1 }).exec(),
+    Item.find( {category: req.params.id }, "name price").exec(),
+  ]);
+
+  if (allItemsWithCategory.length > 0) {
+    res.render("category_delete", {
+      title: "Delete Category",
+      category: category,
+      all_categories: getAllCategories,
+      items: allItemsWithCategory,
+    });
+    return;
+  }  else {
+    await Category.findByIdAndDelete(category._id);
+    res.redirect("/catalog/categories");
+  }
 })
 
 // Display Category update form on GET.

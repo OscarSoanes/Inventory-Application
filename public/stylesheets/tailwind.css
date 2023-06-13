@@ -103,3 +103,7 @@ select {
 .primary-button {
   @apply rounded bg-sky-300 col-span-2 p-2 w-32 mx-auto hover:bg-white border-sky-300 border-2;
 }
+
+.delete-confirm {
+  @apply my-4;
+}

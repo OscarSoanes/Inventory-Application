@@ -43,28 +43,29 @@
     
     <main>
       <h1> <%= title %></h1>
-      <div class="detail-container">
-        <p>Name: </p>
-        <p class="name"><%= category.name %> </p>
-        <p>Description: </p>
-        <p> <%= category.desc %> </p>
-      </div>
+      <p> Name: <%= category.name %> </p>
 
+      <% if (items.length) { %>
+        <p> Please delete the following items before attempting to delete this category.</p>
 
-      <p class="item_category_heading">Items in Category:</p>
-      <div class="list_of_items">
-        <% all_items.forEach(item => { %>
-          <a href="<%= item.url %>">
-            <p> Name: <%= item.name %> </p>
-            <p> Quantity: <%= item.number_in_stock %></p>
-          </a>
-        <% }) %>
-      </div>
+        <p class="item_category_heading">Items in Category:</p>
+        <div class="list_of_items">
+          <% items.forEach(item => { %>
+            <a href="<%= item.url %>">
+              <p> Name: <%= item.name %> </p>
+              <p> Quantity: <%= item.number_in_stock %></p>
+            </a>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p class="delete-confirm"> Do you really want to delete this category? </p>
 
-      <div>
-        <a href=" <%= category.url %>/delete"> Delete Category </a>
-        <a href=" <%= category.url %>/update"> Update Category </a>
-      </div>
+        <form action="" method="post">
+          <input type="hidden" name="categoryid" required="true" value=" <%= category.id %>">
+          
+          <button type="submit" class="primary-button">Submit</button>
+        </form>
+      <% } %>
     </main>
   </body>
 </html>
