@@ -107,13 +107,32 @@ exports.item_create_post = [
 
 // Display item delete form on GET.
 exports.item_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Item delete GET");
+  const [item, getAllCategories] = await Promise.all([
+    Item.findById(req.params.id).exec(),
+    Category.find().sort({ name: 1 }).exec()
+  ])
+
+  if (item === null) {
+    // no results
+
+    res.redirect("/catalog/items");
+  }
+
+  res.render("item_delete", {
+    title: "Delete Item",
+    item: item,
+    all_categories: getAllCategories,
+  });
 })
 
 // Handle item delete form on POST.
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Item delete POST");
+  const item = await Item.findById(req.params.id).exec();
+  
+  await Item.findByIdAndDelete(item._id);
+  res.redirect("/catalog/items");
 })
+
 
 // Display item update form on GET.
 exports.item_update_get = asyncHandler(async (req, res, next) => {

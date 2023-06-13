@@ -43,24 +43,14 @@
     
     <main>
       <h1> <%= title %></h1>
-      <div class="detail-container">
-        <p>Name: </p>
-        <p class="name"><%= item.name %> </p>
-        <p>Description: </p>
-        <p> <%= item.desc %> </p>
-        <p>Number In Stock: </p>
-        <p> <%= item.number_in_stock %></p>
-        <p>Price: </p>
-        <p> <%= item.price_format %></p>
+      <p> Name: <%= item.name %> </p>
+      <p class="delete-confirm"> Do you really want to delete this item? </p>
 
-        <p>Category:</p>
-        <p> <%= item.category.name %></p>
-      </div>
-
-      <div class="menu-buttons">
-        <a href=" <%= item.url %>/delete"> Delete Item </a>
-        <a href=" <%= item.url %>/update"> Update Item </a>
-      </div>
+      <form action="" method="post">
+        <input type="hidden" name="itemid" required="true" value=" <%= item.id %>">
+          
+        <button type="submit" class="primary-button">Submit</button>
+      </form>
     </main>
   </body>
 </html>

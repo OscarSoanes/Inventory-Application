@@ -85,7 +85,7 @@ exports.category_create_post = [
       // There are errors. Rerender form with sanitized data.
 
       const allCategories = await Category.find().sort({ name: 1 }).exec();
-
+      
       res.render("category_form", {
         title: "Create Category",
         all_categories: allCategories,
