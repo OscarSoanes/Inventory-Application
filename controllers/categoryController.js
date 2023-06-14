@@ -85,7 +85,7 @@ exports.category_create_post = [
       // There are errors. Rerender form with sanitized data.
 
       const allCategories = await Category.find().sort({ name: 1 }).exec();
-      
+
       res.render("category_form", {
         title: "Create Category",
         all_categories: allCategories,
@@ -128,7 +128,7 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
     Category.find().sort({ name: 1 }).exec(),
     Item.find( {category: req.params.id }, "name price").exec(),
   ]);
-
+  
   if (allItemsWithCategory.length > 0) {
     res.render("category_delete", {
       title: "Delete Category",
@@ -145,10 +145,59 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display Category update form on GET.
 exports.category_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Category update GET");
+  const [category, getAllCategories] = await Promise.all([
+    Category.findById(req.params.id),
+    Category.find().sort({ name: 1 }).exec(),
+  ])
+  if (category === null) {
+    const err = new Error("Category not found");
+    err.status = 404;
+
+    return next(err);
+  }
+
+  res.render("category_form", {
+    title: "Update Category",
+    category: category,
+    all_categories: getAllCategories,
+    errors: []
+  });
 })
 
 // Handle Category update form on POST.
-exports.category_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Category update POST");
-})
+exports.category_update_post = [
+  // Validate and sanitize the fields
+  body("name", "Name must not be empty")
+  .trim()
+  .isLength({ min: 1})
+  .escape(),
+
+  body("description", "Description must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const category = new Category({
+      name: req.body.name,
+      desc: req.body.desc,
+      _id: req.params.id
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Rerender form.
+
+      res.render("category_form", {
+        title: "Update Category",
+        all_categories: getAllCategories,
+        category: category,
+        errors: errors.array()
+      });
+    } else {
+      const thecategory = await Category.findByIdAndUpdate(req.params.id, category);
+      res.redirect(thecategory.url);
+    }
+  })
+  ]
