@@ -157,6 +157,56 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 })
 
 // Handle item update form on POST.
-exports.item_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Item update POST");
-})
+exports.item_update_post = [
+  // Validate and sanitize fields.
+
+  body("name", "Name must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+  body("desc", "Description must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+  body("number_in_stock", "Number in Stock must not be empty")
+    .trim()
+    .isNumeric()
+    .escape(),
+  body("price", "Price must not be empty")
+    .trim()
+    .isDecimal().withMessage("Price must be a decimal")
+    .escape(),
+  body("category", "Category must not be empty")
+    .trim()
+    .isLength({ min: 1})
+    .escape(),
+  
+  asyncHandler(async (req, res, next) => {
+    // Extract the errors from request
+    const errors = validationResult(req);
+
+    const item = new Item({
+      name: req.body.name,
+      desc: req.body.desc,
+      number_in_stock: req.body.number_in_stock,
+      price: req.body.price,
+      category: req.body.category,
+      _id: req.params.id
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors. Rererender form.
+      const getAllCategories = await Category.find().sort({ name: 1 }).exec();
+
+      res.render("item_form", {
+        title: "Update Item",
+        all_categories: getAllCategories,
+        item: item,
+        errors: []
+      });
+    } else {
+      const theitem = await Item.findByIdAndUpdate(req.params.id, item);
+      res.redirect(theitem.url);
+    }
+  })
+]

@@ -188,6 +188,7 @@ exports.category_update_post = [
 
     if (!errors.isEmpty()) {
       // There are errors. Rerender form.
+      const getAllCategories = await Category.find().sort({ name: 1 }).exec();
 
       res.render("category_form", {
         title: "Update Category",
