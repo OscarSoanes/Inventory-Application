@@ -136,7 +136,24 @@ exports.item_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display item update form on GET.
 exports.item_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Item update GET");
+  const [item, getAllCategories] = await Promise.all([
+    Item.findById(req.params.id).populate("category").exec(),
+    Category.find().sort({ name: 1 }).exec()
+  ]);
+
+  if (item === null) {
+    const err = new Error("Item not found");
+    err.status = 404;
+
+    return next(err);
+  }
+
+  res.render("item_form", {
+    title: "Update Item",
+    all_categories: getAllCategories,
+    item: item,
+    errors: []
+  });
 })
 
 // Handle item update form on POST.

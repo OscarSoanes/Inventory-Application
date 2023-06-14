@@ -43,20 +43,21 @@
     
     <main>
       <h1> <%= title %></h1>
-      
+      <p></p>
       <div class="create-form">
         <form action="" method="post">
           <label for="name">Name: </label>
-          <input type="text" name="name" id="name" placeholder="Name" required="true" value="<%= item.name ? '' : item.name %>">
+          <input type="text" name="name" id="name" placeholder="Name" required="true" value="<%= item === undefined ? '' : item.name %>">
 
           <label for="desc">Description: </label>
-          <textarea name="desc" id="desc" rows="3" placeholder="Description" value=" <%= item.desc ? '' : item.desc %>"></textarea>
+          <textarea name="desc" id="desc" rows="3" placeholder="Description"><%= item === undefined ? '' : item.desc %></textarea>
 
           <label for="number_in_stock">Number in Stock:</label>
-          <input type="number" name="number_in_stock" id="number_in_stock" min="0" placeholder="Number In Stock" required="true" value=" <%= item.number_in_stock ? '' : item.number_in_stock %>">
+          <input type="number" name="number_in_stock" id="number_in_stock" min="0" placeholder="Number In Stock" required="true" value="<%= item ? item.number_in_stock : '' %>">
+
 
           <label for="price">Price: </label>
-          <input type="number" name="price" id="price" step="0.01" min="0.01" pattern="^\d*(\.\d{0,2})?$" required="true" placeholder="Price" value=" <%= item.price ? '' : item.price %>">
+          <input type="number" name="price" id="price" step="0.01" min="0.01" pattern="^\d*(\.\d{0,2})?$" required="true" placeholder="Price" value="<%= item ? parseFloat(item.price) : '' %>">
 
           <label for="category">Category:</label>
           <select name="category" id="category" required="true" placeholder="Select Category">
